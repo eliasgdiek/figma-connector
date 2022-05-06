@@ -101,7 +101,7 @@ export default function Home() {
                             {
                                 files.sort(function(a, b){return new Date(b.last_modified) - new Date(a.last_modified)}).map(file => (
                                     <div
-                                     className='mx-2 mb-4 rounded-lg border border-gray-300 w-80 shrink-0 focus:ring-2 focus:ring-blue-500 overflow-hidden hover:shadow-md'
+                                     className='mx-2 mb-4 rounded-lg border border-gray-300 w-80 shrink-0 focus:ring-2 focus:ring-blue-500 overflow-hidden hover:shadow-md select-none'
                                      tabIndex={0}
                                      key={file.key}
                                      onDoubleClick={() => openFile(file.key)}
