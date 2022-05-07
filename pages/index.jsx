@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link';
 
 export default function Home() {
   const generateState = (length) => {
@@ -12,7 +13,7 @@ export default function Home() {
    return result;
   }
 
-  const codeUrl = 'https://www.figma.com/oauth?client_id='+ process.env.FIGMA_CLIENT_ID +'&redirect_uri='+ process.env.FIGMA_REDIRECT_URI +'&scope=file_read&state='+ generateState(10) +'&response_type=code'
+  const codeUrl = 'https://www.figma.com/oauth?client_id='+ process.env.NEXT_PUBLIC_FIGMA_CLIENT_ID +'&redirect_uri='+ process.env.NEXT_PUBLIC_FIGMA_REDIRECT_URI +'&scope=file_read&state='+ generateState(10) +'&response_type=code'
 
   return (
     <div className={`container mx-auto`}>
@@ -25,7 +26,11 @@ export default function Home() {
       <main className={`px-8 flex-col items-center justify-center pt-0`}>
         <div className='w-full py-10'>
           <div className='py-4 flex items-center justify-center'>
-            <Image src={'https://s3-alpha.figma.com/oauth_img/8f475943-6489-4e91-87a4-d7453dc09f36'} width={100} height={100}  />
+            <Link href="/">
+                <a>
+                    <Image src={'https://s3-alpha.figma.com/oauth_img/8f475943-6489-4e91-87a4-d7453dc09f36'} width={100} height={100}  />
+                </a>
+            </Link>
           </div>
           <h1 className={`m-0 leading-tight text-6xl text-center`}>
             Welcome to <span className={`text-blue-700`}>Fabric</span>

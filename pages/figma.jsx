@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -24,7 +25,7 @@ export default function Home() {
     const [code, setCode] = useState('')
     const [state, setState] = useState('')
     const [teamId, setTeamId] = useState()
-    const [files, setFiles] = useState()
+    const [files, setFiles] = useState([])
 
     const handleSyncData = async (e) => {
         try {
@@ -41,7 +42,7 @@ export default function Home() {
             const raw = JSON.stringify({
               "code": code,
               "team_id": teamId,
-              "redirect_uri": "http://localhost:3000/figma"
+              "redirect_uri": process.env.NEXT_PUBLIC_FIGMA_REDIRECT_URI
             });
             
             var requestOptions = {
@@ -85,7 +86,11 @@ export default function Home() {
             <main className={`px-8 flex-col items-center justify-center pt-0 pb-8`}>
                 <div className='w-full py-10'>
                     <div className='py-4 flex items-center justify-center'>
-                        <Image src={'https://s3-alpha.figma.com/oauth_img/8f475943-6489-4e91-87a4-d7453dc09f36'} width={100} height={100}  />
+                        <Link href="/">
+                            <a>
+                                <Image src={'https://s3-alpha.figma.com/oauth_img/8f475943-6489-4e91-87a4-d7453dc09f36'} width={100} height={100}  />
+                            </a>
+                        </Link>
                     </div>
                     <div className="flex items-center justify-center">
                         <span>
@@ -94,19 +99,19 @@ export default function Home() {
                         <span className="text-2xl font-semibold ml-3">Figma Connected</span>
                     </div>
                     {
-                        files?.length ? (
+                        (typeof files === 'object' || typeof files === 'array') && files?.length ? (
                             <div className='mx-auto w-full max-w-screen-xl pt-16'>
                                 <div className="flex items-center justify-center flex-wrap">
                                 {
                                     files.sort(function(a, b){return new Date(b.last_modified) - new Date(a.last_modified)}).map(file => (
                                         <div
-                                        className='mx-2 mb-4 rounded-lg border border-gray-300 w-80 shrink-0 focus:ring-2 focus:ring-blue-500 overflow-hidden hover:shadow-md select-none'
-                                        tabIndex={0}
-                                        key={file.key}
-                                        onDoubleClick={() => openFile(file.key)}
+                                            className='mx-2 mb-4 rounded-lg border border-gray-300 w-72 shrink-0 focus:ring-2 focus:ring-blue-500 overflow-hidden hover:shadow-md select-none'
+                                            tabIndex={0}
+                                            key={file.key}
+                                            onDoubleClick={() => openFile(file.key)}
                                         >
                                             <div className='bg-gray-200 p-3'>
-                                                <Image src={file.thumbnail_url} width="400" height="250" />
+                                                <Image src={file.thumbnail_url} width="286" height="180" />
                                             </div>
                                             <div className='flex items-center p-3'>
                                                 <span className='block mr-2'>
