@@ -82,7 +82,7 @@ export default function Home() {
             </Head>
             {
                 loading ? <Spiner /> : (
-                <main className={`px-8 flex-col items-center justify-center py-10`}>
+                <main className={`px-8 flex-col items-center justify-center py-10 mb-8`}>
                     <div className={`container mx-auto`}>
                         <div className='w-full'>
                             <div className="flex items-center justify-center mb-4">
